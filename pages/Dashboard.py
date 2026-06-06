@@ -1,143 +1,27 @@
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-
-st.set_page_config(
-    page_title="Dashboard",
-    page_icon="📊",
-    layout="wide"
-)
-
-# Load Dataset
-df = pd.read_csv("data/smart_meter_small.csv")
-
-st.title("📊 Energy Analytics Dashboard")
-
-# ==========================================
-# KPI CARDS
-# ==========================================
-
-col1, col2, col3, col4 = st.columns(4)
-
-with col1:
-    st.metric(
-        "⚡ Total Records",
-        f"{len(df):,}"
+FileNotFoundError: This app has encountered an error. The original error message is redacted to prevent data leaks. Full error details have been recorded in the logs (if you're on Streamlit Cloud, click on 'Manage app' in the lower right of your app).
+Traceback:
+File "/mount/src/energypulse-ai/pages/Dashboard.py", line 12, in <module>
+    df = pd.read_csv("data/smart_meter_small.csv")
+File "/home/adminuser/venv/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 873, in read_csv
+    return _read(filepath_or_buffer, kwds)
+File "/home/adminuser/venv/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 300, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+File "/home/adminuser/venv/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 1645, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+File "/home/adminuser/venv/lib/python3.14/site-packages/pandas/io/parsers/readers.py", line 1904, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
-
-with col2:
-    st.metric(
-        "📈 Peak Consumption",
-        f"{df['Global_active_power'].max():.2f} kWh"
+    ^
+File "/home/adminuser/venv/lib/python3.14/site-packages/pandas/io/common.py", line 930, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
     )
-
-with col3:
-    st.metric(
-        "📊 Average Consumption",
-        f"{df['Global_active_power'].mean():.2f} kWh"
-    )
-
-with col4:
-    st.metric(
-        "🔋 Minimum Consumption",
-        f"{df['Global_active_power'].min():.2f} kWh"
-    )
-
-st.divider()
-
-# ==========================================
-# CONSUMPTION TREND
-# ==========================================
-
-st.subheader("⚡ Electricity Consumption Trend")
-
-fig1 = px.line(
-    df.head(5000),
-    y="Global_active_power",
-    title="Consumption Trend"
-)
-
-st.plotly_chart(
-    fig1,
-    use_container_width=True
-)
-
-# ==========================================
-# MONTHLY ANALYSIS
-# ==========================================
-
-st.subheader("📅 Monthly Average Consumption")
-
-monthly = (
-    df.groupby("Month")["Global_active_power"]
-    .mean()
-    .reset_index()
-)
-
-fig2 = px.bar(
-    monthly,
-    x="Month",
-    y="Global_active_power",
-    title="Monthly Consumption"
-)
-
-st.plotly_chart(
-    fig2,
-    use_container_width=True
-)
-
-# ==========================================
-# WEEKEND VS WEEKDAY
-# ==========================================
-
-st.subheader("🏠 Weekend vs Weekday Usage")
-
-weekend = (
-    df.groupby("Weekend")["Global_active_power"]
-    .mean()
-    .reset_index()
-)
-
-weekend["Weekend"] = weekend["Weekend"].replace(
-    {0: "Weekday", 1: "Weekend"}
-)
-
-fig3 = px.pie(
-    weekend,
-    values="Global_active_power",
-    names="Weekend",
-    title="Weekend vs Weekday Consumption"
-)
-
-st.plotly_chart(
-    fig3,
-    use_container_width=True
-)
-
-# ==========================================
-# SEASONAL ANALYSIS
-# ==========================================
-
-if "Season" in df.columns:
-
-    st.subheader("🌦 Seasonal Consumption")
-
-    season = (
-        df.groupby("Season")["Global_active_power"]
-        .mean()
-        .reset_index()
-    )
-
-    fig4 = px.bar(
-        season,
-        x="Season",
-        y="Global_active_power",
-        title="Seasonal Average Consumption"
-    )
-
-    st.plotly_chart(
-        fig4,
-        use_container_width=True
-    )
-
-st.success("✅ Dashboard Loaded Successfully")
