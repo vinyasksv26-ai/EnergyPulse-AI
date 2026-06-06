@@ -12,9 +12,7 @@ st.set_page_config(
 st.title("🚨 Energy Anomaly Detection")
 
 # Load Dataset
-df = pd.read_csv(
-    "data/smart_meter_small.csv"
-)
+df = pd.read_csv("smart_meter_small.csv")
 
 # Train Isolation Forest
 model = IsolationForest(
@@ -26,20 +24,13 @@ df["Anomaly"] = model.fit_predict(
     df[["Global_active_power"]]
 )
 
-# Extract anomalies
-anomalies = df[
-    df["Anomaly"] == -1
-]
+anomalies = df[df["Anomaly"] == -1]
 
-# KPI
 st.metric(
     "🚨 Anomalies Detected",
     len(anomalies)
 )
 
-st.divider()
-
-# Scatter Plot
 fig = px.scatter(
     df.head(10000),
     x=df.head(10000).index,
@@ -53,8 +44,7 @@ st.plotly_chart(
     use_container_width=True
 )
 
-# Show anomaly records
-st.subheader("⚠️ Detected Anomalies")
+st.subheader("Detected Anomalies")
 
 st.dataframe(
     anomalies.head(20),
