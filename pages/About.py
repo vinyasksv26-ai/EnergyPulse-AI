@@ -11,26 +11,31 @@ st.title("ℹ️ About EnergyPulse AI")
 st.markdown("""
 ## Smart Meter Consumption Profiler
 
-EnergyPulse AI is an AI-powered energy analytics platform.
+EnergyPulse AI is an intelligent energy analytics platform that helps users:
 
-### Objectives
+- Forecast electricity consumption
+- Detect unusual energy usage
+- Analyze seasonal patterns
+- Monitor peak consumption periods
+- Generate energy insights using Machine Learning
 
-- Predict electricity demand
-- Detect abnormal energy usage
-- Identify peak load behavior
-- Analyze seasonal consumption
-
-### Technologies
+### Technologies Used
 
 - Python
 - Pandas
-- NumPy
 - Scikit-Learn
 - Plotly
 - Streamlit
 
-### Machine Learning
+### Developed By
 
-- Random Forest Regressor
-- Isolation Forest
+Vinyas K S  
+4VM24CS047  
+Vidya Vikas Institute of Engineering and Technology
 
+### Project Goal
+
+To help consumers understand and optimize electricity usage through data-driven analytics and predictive modeling.
+""")
+
+st.success("✅ About Page Loaded Successfully")
