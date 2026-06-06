@@ -34,8 +34,3 @@ EnergyPulse AI is an AI-powered energy analytics platform.
 - Random Forest Regressor
 - Isolation Forest
 
-### Dataset
-
-
-Vinyas K S
-""")
