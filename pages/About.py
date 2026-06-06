@@ -27,11 +27,6 @@ EnergyPulse AI is an intelligent energy analytics platform that helps users:
 - Plotly
 - Streamlit
 
-### Developed By
-
-Vinyas K S  
-4VM24CS047  
-Vidya Vikas Institute of Engineering and Technology
 
 ### Project Goal
 
