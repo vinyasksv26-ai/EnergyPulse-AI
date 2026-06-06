@@ -48,6 +48,3 @@ st.markdown("""
 ℹ️ About
 - Project information
 
-### Developed By
-Vinyas K S
-""")
