@@ -9,58 +9,62 @@ st.set_page_config(
 )
 
 # Load Dataset
-df = pd.read_csv("data/smart_meter_feature_engineered.csv")
+df = pd.read_csv("data/smart_meter_small.csv")
 
 st.title("📊 Energy Analytics Dashboard")
 
-# -----------------------------
+# ==========================================
 # KPI CARDS
-# -----------------------------
+# ==========================================
 
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric(
-    "⚡ Total Records",
-    f"{len(df):,}"
-)
+with col1:
+    st.metric(
+        "⚡ Total Records",
+        f"{len(df):,}"
+    )
 
-col2.metric(
-    "📈 Peak Consumption",
-    f"{df['Global_active_power'].max():.2f} kWh"
-)
+with col2:
+    st.metric(
+        "📈 Peak Consumption",
+        f"{df['Global_active_power'].max():.2f} kWh"
+    )
 
-col3.metric(
-    "📊 Average Consumption",
-    f"{df['Global_active_power'].mean():.2f} kWh"
-)
+with col3:
+    st.metric(
+        "📊 Average Consumption",
+        f"{df['Global_active_power'].mean():.2f} kWh"
+    )
 
-col4.metric(
-    "🔋 Minimum Consumption",
-    f"{df['Global_active_power'].min():.2f} kWh"
-)
+with col4:
+    st.metric(
+        "🔋 Minimum Consumption",
+        f"{df['Global_active_power'].min():.2f} kWh"
+    )
 
 st.divider()
 
-# -----------------------------
+# ==========================================
 # CONSUMPTION TREND
-# -----------------------------
+# ==========================================
 
 st.subheader("⚡ Electricity Consumption Trend")
 
-fig = px.line(
+fig1 = px.line(
     df.head(5000),
     y="Global_active_power",
     title="Consumption Trend"
 )
 
 st.plotly_chart(
-    fig,
+    fig1,
     use_container_width=True
 )
 
-# -----------------------------
+# ==========================================
 # MONTHLY ANALYSIS
-# -----------------------------
+# ==========================================
 
 st.subheader("📅 Monthly Average Consumption")
 
@@ -82,9 +86,9 @@ st.plotly_chart(
     use_container_width=True
 )
 
-# -----------------------------
+# ==========================================
 # WEEKEND VS WEEKDAY
-# -----------------------------
+# ==========================================
 
 st.subheader("🏠 Weekend vs Weekday Usage")
 
@@ -110,9 +114,9 @@ st.plotly_chart(
     use_container_width=True
 )
 
-# -----------------------------
+# ==========================================
 # SEASONAL ANALYSIS
-# -----------------------------
+# ==========================================
 
 if "Season" in df.columns:
 
@@ -136,4 +140,4 @@ if "Season" in df.columns:
         use_container_width=True
     )
 
-st.success("Dashboard Loaded Successfully")
+st.success("✅ Dashboard Loaded Successfully")
