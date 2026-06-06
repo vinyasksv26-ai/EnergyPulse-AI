@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 st.set_page_config(
     page_title="EnergyPulse AI",
@@ -6,22 +7,25 @@ st.set_page_config(
     layout="wide"
 )
 
-# Logo and Title
-col1, col2 = st.columns([1, 4])
+# Logo
+logo_path = "assets/logo.png"
 
-with col1:
-    st.image("assets/logo.png", width=150)
+if os.path.exists(logo_path):
+    try:
+        st.image(logo_path, width=180)
+    except:
+        st.warning("Logo could not be loaded")
 
-with col2:
-    st.title("⚡ EnergyPulse AI")
-    st.subheader("Smart Meter Consumption Profiler")
+# Title
+st.title("⚡ EnergyPulse AI")
+st.subheader("Smart Meter Consumption Profiler")
 
 st.divider()
 
 st.markdown("""
 ## Welcome to EnergyPulse AI
 
-EnergyPulse AI is an intelligent Smart Meter Consumption Profiler that helps users:
+EnergyPulse AI is an AI-powered Smart Meter Consumption Profiler that helps users:
 
 ✅ Monitor Electricity Usage
 
@@ -37,22 +41,20 @@ EnergyPulse AI is an intelligent Smart Meter Consumption Profiler that helps use
 
 ---
 
-### Features
+### 📊 Dashboard
+View energy consumption KPIs and trends.
 
-📊 Dashboard  
-View real-time energy analytics and KPIs.
-
-🔮 Prediction  
+### 🔮 Prediction
 Predict future electricity consumption using Machine Learning.
 
-🚨 Anomaly Detection  
-Detect unusual energy usage patterns automatically.
+### 🚨 Anomaly Detection
+Identify unusual energy usage patterns.
 
-📈 Analytics  
+### 📈 Analytics
 Explore monthly, hourly, and seasonal consumption trends.
 
-ℹ️ About  
-Learn about the project, technologies, and objectives.
+### ℹ️ About
+Learn about the project and technologies used.
 
 ---
 
@@ -60,10 +62,15 @@ Learn about the project, technologies, and objectives.
 
 - Python
 - Pandas
+- NumPy
 - Scikit-Learn
 - Plotly
 - Streamlit
 - Machine Learning
+
+---
+
+
 
 """)
 
